@@ -1,6 +1,6 @@
 package tasks;
 
-import java.util.List;
+import java.time.Duration;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -30,21 +30,31 @@ class Task1 {
 	    driver.manage().window().setSize(new Dimension(1311, 741));
 	    driver.findElement(By.cssSelector(".sm\\3Aml-10 .truncate")).click();
 	    driver.findElement(By.cssSelector(".flex > .careersite-button > .flex")).click();
-	    {
-	      WebElement element = driver.findElement(By.cssSelector(".flex > .careersite-button > .flex"));
-	      System.out.println(element.getText());
-	      Actions builder = new Actions(driver);
-	      builder.moveToElement(element).perform();
-	    }
-	    WebElement lista = driver.findElement(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul"));
-	    System.out.println(lista.getText());
+	    WebElement element = driver.findElement(By.cssSelector(".flex > .careersite-button > .flex"));
+	    Actions builder = new Actions(driver);
+	    builder
+	    	.moveToElement(element)
+	    	.perform();
+		driver
+			.manage()
+			.timeouts()
+			.implicitlyWait(Duration.ofSeconds(10));
+		
 	    
-	    List<WebElement> allOptions = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));
-  	    System.out.println(allOptions.size());
-	    for(int i = 1; i < allOptions.size(); i++) {
-	    	System.out.println(driver.findElement(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul > li:nth-child(" + i + ") > a > span")).getText());
-	    	System.out.println(driver.findElement(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul > li:nth-child(" + i + ") > a > div > span:nth-child(1)")).getText());
-	    	System.out.println(driver.findElement(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul > li:nth-child(" + i + ") > a > div > span:last-child")).getText());
-	    }
+	    WebElement listOfJobs = driver.findElement(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul"));
+	    System.out.println("Lista: " + listOfJobs.getText());
+	    
+	    System.out.println("Title: " + driver.getTitle());
+	   
+	    
+//	    List<WebElement> jobs = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));
+//  	    System.out.println("SIZE " + jobs.size());
+//  	    int jobsSize = jobs.size();
+//	    
+//  	    for (WebElement job : jobs) {
+//			System.out.println(job);
+//		}
+  	    
+		  
 	}
 }
