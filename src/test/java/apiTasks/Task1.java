@@ -15,7 +15,7 @@ import io.restassured.response.Response;
 class Task1 {
 
 	@Test
-	@DisplayName("Get all countries and filter those that contain Austr")
+	@DisplayName("Comparing two lists content")
 	void test() {
 		final String KEYWORD1 = "Austr";
 		
@@ -49,13 +49,16 @@ class Task1 {
 		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
 			
 		System.out.println("Countries filtered with kw "  + allFilteredCountries);
-		String actual = allFilteredCountries.toString();
-		
+			
 		//Check if two lists are the same
 		try {
-			assertEquals(expected, actual, "Lists are not the same");
+			String actual = allFilteredCountries.toString();
+			assertEquals(expected, actual, "Lists are the same");
+			//assertThrows(NullPointerException.class, () -> assertEquals(expected, actual));
 		} catch (NullPointerException e) {
-			System.out.println(e.getMessage());
+			System.out.println("NullPointerException " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Unknown exception " + e.getMessage());
 		}
 	}
 

@@ -16,7 +16,7 @@ import io.restassured.response.Response;
 class Task3 {
 
 	@Test
-	@DisplayName("Get all countries and filter those that contain Ser")
+	@DisplayName("Comparing two lists content")
 	void test() {
 		final String KEYWORD3 = "Ser";
 		
@@ -53,7 +53,7 @@ class Task3 {
 		String actual = allFilteredCountries.toString();
 				
 		//Check if two lists are the not the same
-		assertSame(expected, actual, "Lists are the same");
+		assertSame(expected, actual, "Lists should be equal");
 	}
 
 }
