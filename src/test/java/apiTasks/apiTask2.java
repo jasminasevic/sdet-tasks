@@ -16,7 +16,7 @@ public class apiTask2 {
   @Test
   @DisplayName("Get all countries and filter those that contain United")
   public void f() {
-	  	final String KEYWORD1 = "United";
+	  	final String KEYWORD2 = "United";
 		
 	  	//Get all countries
 		Response response = given().get("https://restcountries.com/v3.1/all");
@@ -29,7 +29,7 @@ public class apiTask2 {
 		List<String> allCountriesWithKwUnited = new ArrayList<String>();
 		
 		for (String c : allCountries) {
-			if(c.contains(KEYWORD1)) {
+			if(c.contains(KEYWORD2)) {
 				allCountriesWithKwUnited.add(c);
 			}
 		}
@@ -38,6 +38,19 @@ public class apiTask2 {
 		
 		System.out.println("All countries with kw United " + allCountriesWithKwUnited);
 		
+		//Get filtered countries with kw
+		String url = "https://restcountries.com/v3.1/name/" + KEYWORD2;
+			
+		Response filteredCountries = given()
+				.get(url);
+			
+		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
+		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
+			
+		System.out.println("Countries filtered with kw United "  + allFilteredCountries);
+		String actual = allFilteredCountries.toString();
 		
+		//Check if two lists are the not the same
+		assertNotSame(expected, actual, "Lists are not the same");
 	}
 }
