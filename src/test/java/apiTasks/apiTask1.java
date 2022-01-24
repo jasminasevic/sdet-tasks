@@ -23,22 +23,41 @@ public class apiTask1 {
 		
 	  	//Get all countries
 		Response response = given().get("https://restcountries.com/v3.1/all");
-		JsonPath jsonPath = response.jsonPath();
+		JsonPath allCountriesJsonPath = response.jsonPath();
 		
-		List<String> countries = jsonPath.get("name.official");
-		System.out.println("All countries " + countries);
+		List<String> allCountries = allCountriesJsonPath.get("name.official");
+		System.out.println("All countries " + allCountries);
 		
 		//Get all countries with kw Austr in name
 		List<String> allCountriesWithKwAustr = new ArrayList<String>();
 		
-		for (String c : countries) {
+		for (String c : allCountries) {
 			if(c.contains(KEYWORD1)) {
 				allCountriesWithKwAustr.add(c);
 			}
 		}
 		
-		System.out.println(allCountriesWithKwAustr);
+		String unexpected = allCountriesWithKwAustr.toString();
 		
+		System.out.println("All countries with kw Austr " + allCountriesWithKwAustr);
 		
-  }
+		//Get filtered countries with kw Austr
+		String url = "https://restcountries.com/v3.1/name/" + KEYWORD1;
+			
+		Response filteredCountries = given()
+				.get(url);
+			
+		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
+		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
+			
+		System.out.println("Countries filtered with kw Austr "  + allFilteredCountries);
+		String actual = allFilteredCountries.toString();
+		
+		//Check if two lists are the same
+		try {
+			assertNotSame(unexpected, actual, "Lists are not the same");
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
+  	}
 }
