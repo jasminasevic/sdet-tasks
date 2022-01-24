@@ -1,25 +1,23 @@
 package apiTasks;
 
-import org.testng.annotations.Test;
-
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class apiTask1 {
-  
-  @Test
-  @DisplayName("Get all countries and filter those that contain Austr")
-  public void f() {
-	  
-	  	final String KEYWORD1 = "Austr";
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+class Task1 {
+
+	@Test
+	@DisplayName("Get all countries and filter those that contain Austr")
+	void test() {
+		final String KEYWORD1 = "Austr";
 		
 	  	//Get all countries
 		Response response = given().get("https://restcountries.com/v3.1/all");
@@ -55,9 +53,10 @@ public class apiTask1 {
 		
 		//Check if two lists are the same
 		try {
-			assertNotEquals(expected, actual, "Lists are not the same");
+			assertEquals(expected, actual, "Lists are not the same");
 		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
-  	}
+	}
+
 }

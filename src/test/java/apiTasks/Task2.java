@@ -1,22 +1,23 @@
 package apiTasks;
 
 import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
-public class apiTask3 {
-  @Test
-  @DisplayName("Get all countries and filter those that contain Ser")
-  public void f() {
-	   final String KEYWORD3 = "Ser";
+class Task2 {
+
+	@Test
+	@DisplayName("Get all countries and filter those that contain United")
+	void test() {
+		final String KEYWORD2 = "United";
 		
 	  	//Get all countries
 		Response response = given().get("https://restcountries.com/v3.1/all");
@@ -26,31 +27,32 @@ public class apiTask3 {
 		System.out.println("All countries " + allCountries);
 		
 		//Get all countries with kw in name
-		List<String> allCountriesWithKwSer = new ArrayList<String>();
-				
+		List<String> allCountriesWithKwUnited = new ArrayList<String>();
+		
 		for (String c : allCountries) {
-			if(c.contains(KEYWORD3)) {
-				allCountriesWithKwSer.add(c);
-				}
+			if(c.contains(KEYWORD2)) {
+				allCountriesWithKwUnited.add(c);
 			}
-				
-		String expected = allCountriesWithKwSer.toString();
-				
-		System.out.println("All countries with kw Ser " + allCountriesWithKwSer);
+		}
+		
+		String expected = allCountriesWithKwUnited.toString();
+		
+		System.out.println("All countries with kw United " + allCountriesWithKwUnited);
 		
 		//Get filtered countries with kw
-		String url = "https://restcountries.com/v3.1/name/" + KEYWORD3;
-					
+		String url = "https://restcountries.com/v3.1/name/" + KEYWORD2;
+			
 		Response filteredCountries = given()
 				.get(url);
-					
+			
 		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
 		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
-					
-		System.out.println("Countries filtered with kw Ser "  + allFilteredCountries);
+			
+		System.out.println("Countries filtered with kw United "  + allFilteredCountries);
 		String actual = allFilteredCountries.toString();
-				
+		
 		//Check if two lists are the not the same
-		assertSame(expected, actual, "Lists are the same");
-  }
+		assertNotSame(expected, actual, "Lists are not the same");
+	}
+
 }

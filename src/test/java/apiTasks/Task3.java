@@ -1,22 +1,24 @@
 package apiTasks;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.testng.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
-public class apiTask3 {
-  @Test
-  @DisplayName("Get all countries and filter those that contain Ser")
-  public void f() {
-	   final String KEYWORD3 = "Ser";
+class Task3 {
+
+	@Test
+	@DisplayName("Get all countries and filter those that contain Ser")
+	void test() {
+		final String KEYWORD3 = "Ser";
 		
 	  	//Get all countries
 		Response response = given().get("https://restcountries.com/v3.1/all");
@@ -52,5 +54,6 @@ public class apiTask3 {
 				
 		//Check if two lists are the not the same
 		assertSame(expected, actual, "Lists are the same");
-  }
+	}
+
 }
