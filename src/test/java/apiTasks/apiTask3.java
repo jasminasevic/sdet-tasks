@@ -1,6 +1,7 @@
 package apiTasks;
 
 import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import io.restassured.response.Response;
 public class apiTask3 {
   @Test
   public void f() {
-	  final String KEYWORD3 = "Ser";
+	   final String KEYWORD3 = "Ser";
 		
 	  	//Get all countries
 		Response response = given().get("https://restcountries.com/v3.1/all");
@@ -34,5 +35,20 @@ public class apiTask3 {
 		String expected = allCountriesWithKwSer.toString();
 				
 		System.out.println("All countries with kw Ser " + allCountriesWithKwSer);
+		
+		//Get filtered countries with kw
+		String url = "https://restcountries.com/v3.1/name/" + KEYWORD3;
+					
+		Response filteredCountries = given()
+				.get(url);
+					
+		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
+		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
+					
+		System.out.println("Countries filtered with kw Ser "  + allFilteredCountries);
+		String actual = allFilteredCountries.toString();
+				
+		//Check if two lists are the not the same
+		assertSame(expected, actual, "Lists are the same");
   }
 }
