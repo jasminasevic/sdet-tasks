@@ -4,7 +4,6 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.testng.Assert.assertSame;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -18,30 +17,13 @@ class Task3 {
 	@Test
 	@DisplayName("Comparing two lists content")
 	void test() {
-		final String KEYWORD3 = "Ser";
+		final String KEYWORD = "Ser";
 		
-	  	//Get all countries
-		Response response = given().get("https://restcountries.com/v3.1/all");
-		JsonPath allCountriesJsonPath = response.jsonPath();
+		//Get all countries
+		String expected = CountryList.getCountries(KEYWORD);
 		
-		List<String> allCountries = allCountriesJsonPath.get("name.official");
-		System.out.println("All countries " + allCountries);
-		
-		//Get all countries with kw in name
-		List<String> allCountriesWithKwSer = new ArrayList<String>();
-				
-		for (String c : allCountries) {
-			if(c.contains(KEYWORD3)) {
-				allCountriesWithKwSer.add(c);
-				}
-			}
-				
-		String expected = allCountriesWithKwSer.toString();
-				
-		System.out.println("All countries with kw Ser " + allCountriesWithKwSer);
-		
-		//Get filtered countries with kw
-		String url = "https://restcountries.com/v3.1/name/" + KEYWORD3;
+		//Get filtered countries with keyword
+		String url = "https://restcountries.com/v3.1/name/" + KEYWORD;
 					
 		Response filteredCountries = given()
 				.get(url);
@@ -49,10 +31,9 @@ class Task3 {
 		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
 		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
 					
-		System.out.println("Countries filtered with kw Ser "  + allFilteredCountries);
 		String actual = allFilteredCountries.toString();
 				
-		//Check if two lists are the not the same
+		//Check if two lists are the same
 		assertSame(expected, actual, "Lists should be equal");
 	}
 

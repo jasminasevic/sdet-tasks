@@ -1,6 +1,8 @@
 package tasks;
 
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -38,11 +40,17 @@ class Task1 {
 		driver
 			.manage()
 			.timeouts()
-			.implicitlyWait(Duration.ofSeconds(10));
+			.implicitlyWait(Duration.ofSeconds(20));
 		
 	    
-	    WebElement listOfJobs = driver.findElement(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul"));
-	    System.out.println("Lista: " + listOfJobs.getText());
+	    List<WebElement> listOfJobs = driver.findElements(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul"));
+	    System.out.println("Lista: " + listOfJobs.toString());
+	    
+	    Iterator<WebElement> itr = listOfJobs.iterator();
+	    while(itr.hasNext()) {
+	        System.out.println(itr.next().getText());
+	    }
+	    
 	    
 	    System.out.println("Title: " + driver.getTitle());
 	   
