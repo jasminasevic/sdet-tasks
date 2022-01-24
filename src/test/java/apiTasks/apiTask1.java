@@ -28,7 +28,7 @@ public class apiTask1 {
 		List<String> allCountries = allCountriesJsonPath.get("name.official");
 		System.out.println("All countries " + allCountries);
 		
-		//Get all countries with kw Austr in name
+		//Get all countries with kw in name
 		List<String> allCountriesWithKwAustr = new ArrayList<String>();
 		
 		for (String c : allCountries) {
@@ -37,11 +37,11 @@ public class apiTask1 {
 			}
 		}
 		
-		String unexpected = allCountriesWithKwAustr.toString();
+		String expected = allCountriesWithKwAustr.toString();
 		
-		System.out.println("All countries with kw Austr " + allCountriesWithKwAustr);
+		System.out.println("All countries with kw " + allCountriesWithKwAustr);
 		
-		//Get filtered countries with kw Austr
+		//Get filtered countries with kw
 		String url = "https://restcountries.com/v3.1/name/" + KEYWORD1;
 			
 		Response filteredCountries = given()
@@ -50,12 +50,12 @@ public class apiTask1 {
 		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
 		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
 			
-		System.out.println("Countries filtered with kw Austr "  + allFilteredCountries);
+		System.out.println("Countries filtered with kw "  + allFilteredCountries);
 		String actual = allFilteredCountries.toString();
 		
 		//Check if two lists are the same
 		try {
-			assertNotSame(unexpected, actual, "Lists are not the same");
+			assertNotSame(expected, actual, "Lists are not the same");
 		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
