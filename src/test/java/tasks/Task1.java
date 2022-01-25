@@ -1,8 +1,15 @@
 package tasks;
 
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
+import java.lang.reflect.Array;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +20,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.Collections2;
 
 class Task1 {
 	
@@ -41,28 +51,26 @@ class Task1 {
 			.manage()
 			.timeouts()
 			.implicitlyWait(Duration.ofSeconds(20));
-		
+			    
+	    List<WebElement> jobs = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));  	    
 	    
-	    List<WebElement> listOfJobs = driver.findElements(By.cssSelector("#section-jobs > div.mx-auto.text-lg.block-max-w--md > ul"));
-	    System.out.println("Lista: " + listOfJobs.toString());
-	    
-	    Iterator<WebElement> itr = listOfJobs.iterator();
-	    while(itr.hasNext()) {
-	        System.out.println(itr.next().getText());
-	    }
-	    
-	    
-	    System.out.println("Title: " + driver.getTitle());
-	   
-	    
-//	    List<WebElement> jobs = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));
-//  	    System.out.println("SIZE " + jobs.size());
-//  	    int jobsSize = jobs.size();
-//	    
-//  	    for (WebElement job : jobs) {
-//			System.out.println(job);
-//		}
+  	    List<String> allJobDetails = new ArrayList<>();
+
+  	    for (WebElement job : jobs) {
+			allJobDetails.add(job.getText());
+		}
+
+  	    boolean flag = false;
+	  	String filteredList = allJobDetails.stream()
+	            .filter(entry -> entry.contains("Junior SDET Engineer - Redbox team\n" + 
+	            		"QA/QE · Belgrade"))
+	            .collect(Collectors.joining(", ", "", ""));;
   	    
-		  
+	    if(!filteredList.isEmpty()) {
+	    	flag = true;
+	    };
+	    
+  	    assertTrue(flag, "The list should contain Junior SDET Engineer - Redbox team QA/QE · Belgrad position");
+		
 	}
 }
