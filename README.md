@@ -4,8 +4,7 @@ Tasks for a junior SDET position.
 
 ## Prerequisites
 
-- Java SE 11
-- OpenJDK 11
+- Java (OpenJDK 11)
 - Maven
 - JUnit5
 - Selenium
@@ -13,8 +12,7 @@ Tasks for a junior SDET position.
 
 ## Setup
 - git clone https://github.com/jasminasevic/sdet-tasks
-- cd sdet-tasks
 - open Eclipse
 - import sdet-tasks project
-- build project
-- run tests
+- build project (Project -> Build Project)
+- run tests (Open src/test/java folder -> select test(s) -> Run as J Unit Test)
