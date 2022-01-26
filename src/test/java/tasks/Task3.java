@@ -7,6 +7,7 @@ import java.time.Duration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -74,6 +75,13 @@ class Task3 {
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).click();
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).sendKeys("Cover letter....");
 	    
-	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"job-application-form\"]/div[7]/div/div/input[1]")));
+	    try {
+		    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"job-application-form\"]/div[7]/div/div/input[1]")));
+	        System.out.println("Element is clickable");
+	      }
+	    catch(TimeoutException e) {
+	        System.out.println("Element isn't clickable");
+	     }
+	
 	}
 }
