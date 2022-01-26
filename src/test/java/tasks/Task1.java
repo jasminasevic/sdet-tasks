@@ -1,13 +1,9 @@
 package tasks;
 
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Collections2;
 
 class Task1 {
 	
@@ -58,6 +51,7 @@ class Task1 {
 
   	    for (WebElement job : jobs) {
 			allJobDetails.add(job.getText());
+			System.out.println(job.getText());
 		}
 
   	    boolean flag = false;
@@ -65,6 +59,8 @@ class Task1 {
 	            .filter(entry -> entry.contains("Junior SDET Engineer - Redbox team\n" + 
 	            		"QA/QE · Belgrade"))
 	            .collect(Collectors.joining(", ", "", ""));;
+	            
+	            System.out.println(filteredList);
   	    
 	    if(!filteredList.isEmpty()) {
 	    	flag = true;
