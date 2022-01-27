@@ -2,7 +2,6 @@ package tasks;
 
 import static org.testng.Assert.assertTrue;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +14,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 
+@DisplayName("Verify that position is in the list")
 class Task1 {
 	
 	static private WebDriver driver;

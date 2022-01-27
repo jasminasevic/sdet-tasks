@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 import java.time.Duration;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -14,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@DisplayName("Verify that form works properly")
 class Task3 {
 
 	static private WebDriver driver;
@@ -24,6 +26,7 @@ class Task3 {
 	}
 	
 	@Test
+	@DisplayName("Form validation")
 	void test() throws InterruptedException {
 		String baseUrl = "https://careers.interventure.info/";
 

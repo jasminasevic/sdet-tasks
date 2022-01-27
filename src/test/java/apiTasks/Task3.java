@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
+@DisplayName("Positive test scenario")
 class Task3 {
 
 	@Test
