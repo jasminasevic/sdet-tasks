@@ -1,6 +1,7 @@
 package apiTasks;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,14 @@ public class CountryList {
 	
 	public static String getCountries(String keyword){
 		//Get all countries
-		Response response = given().get("https://restcountries.com/v3.1/all");
+		String url = "https://restcountries.com/v3.1/all";
+		
+		int expectedStatusCode = 200;
+		int actualStatusCode = given().get(url).getStatusCode();
+		
+		assertEquals(expectedStatusCode, actualStatusCode, "Status code should be 200");
+		
+		Response response = given().get(url);
 		JsonPath allCountriesJsonPath = response.jsonPath();
 				
 		List<String> allCountries = allCountriesJsonPath.get("name.official");

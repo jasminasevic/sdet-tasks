@@ -23,7 +23,13 @@ class Task3 {
 		
 		//Get filtered countries with keyword
 		String url = "https://restcountries.com/v3.1/name/" + KEYWORD;
-					
+		
+		int expectedStatusCode = 200;
+		int actualStatusCode = given().get(url).getStatusCode();
+		
+		assertEquals(expectedStatusCode, actualStatusCode, "Status code should be 200");
+		
+		
 		Response filteredCountries = given()
 				.get(url);
 					
