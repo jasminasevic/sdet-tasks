@@ -37,6 +37,7 @@ class Task2 {
 	    driver.findElement(By.xpath("//*[@title='Departments']")).click();
 	    driver.findElement(By.xpath("//*[@title='Departments']/..//*[@data-value='QA/QE']")).click();
 	    
+	    Thread.sleep(3000);
 	    driver.findElement(By.xpath("//*[@title='Locations']")).click();
 	    driver.findElement(By.xpath("//*[@title='Locations']/..//*[@data-value='Belgrade']")).click();
 	    
@@ -46,9 +47,25 @@ class Task2 {
   	    List<String> allJobDetails = new ArrayList<>();
 
   	    for (WebElement job : jobs) {
-			allJobDetails.add(job.getText());
-			System.out.println(job.getText());
+  	    	if(job.getText().contains("QA/QE · Belgrade"))
+  	    	{ 
+  	    		allJobDetails.add(job.getText());
+  	    	}
 		}
-	}
-
+  	    
+  	    boolean flag = true; 
+  	    if(allJobDetails.isEmpty()) {
+  	    	flag = false;
+  	    }
+  	    assertTrue(flag, "The list should contain all QA/QE positions in Belgrade");
+  	    
+ 	    
+  	    List<String> jobTitles = new ArrayList<>();
+ 	    for(int i = 0; i< allJobDetails.size(); i++) {
+ 	    	//System.out.println("First element " + allJobDetails.get(i).split("\n")[0]);
+ 	    	String jobTitle = allJobDetails.get(i).split("\n")[0];
+ 	    	jobTitles.add(jobTitle);
+ 	    }
+ 	    System.out.print(jobTitles); 	    
+ 	}
 }
