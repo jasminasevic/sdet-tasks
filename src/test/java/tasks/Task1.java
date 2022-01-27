@@ -28,30 +28,21 @@ class Task1 {
 
 	@Test
 	@DisplayName("Verify that Junior SDET Engineer - Redbox Team is in the list")
-	void test() {
+	void test() throws InterruptedException {
 		String baseUrl = "https://careers.interventure.info/";
 
 		driver.get(baseUrl);
 	    driver.manage().window().setSize(new Dimension(1311, 741));
 	    driver.findElement(By.cssSelector(".sm\\3Aml-10 .truncate")).click();
 	    driver.findElement(By.cssSelector(".flex > .careersite-button > .flex")).click();
-	    WebElement element = driver.findElement(By.cssSelector(".flex > .careersite-button > .flex"));
-	    Actions builder = new Actions(driver);
-	    builder
-	    	.moveToElement(element)
-	    	.perform();
-		driver
-			.manage()
-			.timeouts()
-			.implicitlyWait(Duration.ofSeconds(20));
 			    
+	    Thread.sleep(3000);
 	    List<WebElement> jobs = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));  	    
 	    
   	    List<String> allJobDetails = new ArrayList<>();
 
   	    for (WebElement job : jobs) {
 			allJobDetails.add(job.getText());
-			System.out.println(job.getText());
 		}
 
   	    boolean flag = false;
@@ -59,8 +50,6 @@ class Task1 {
 	            .filter(entry -> entry.contains("Junior SDET Engineer - Redbox team\n" + 
 	            		"QA/QE · Belgrade"))
 	            .collect(Collectors.joining(", ", "", ""));;
-	            
-	            System.out.println(filteredList);
   	    
 	    if(!filteredList.isEmpty()) {
 	    	flag = true;
