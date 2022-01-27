@@ -1,6 +1,7 @@
 package tasks;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.time.Duration;
 
@@ -23,7 +24,7 @@ class Task3 {
 	}
 	
 	@Test
-	void test() {
+	void test() throws InterruptedException {
 		String baseUrl = "https://careers.interventure.info/";
 
 		driver.get(baseUrl);
@@ -63,15 +64,29 @@ class Task3 {
 	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
 	    driver.findElement(By.id("candidate_resume_remote_url")).sendKeys(cvLocation);
 	    
+	    Thread.sleep(1000);
+	    if(driver.findElement(By.xpath("//*[@id=\"upload_resume_field\"]/div[2]/div/div/a")).isDisplayed()) {
+	    	assertTrue(true, "CV is uploaded");
+	    }else {
+	    	assertTrue(false, "CV is not uploaded");
+	    }
+	    
 	    driver.findElement(By.id("candidate_file_remote_url")).click();
 	    String motivationLetterLocation = System.getProperty("user.dir") + "/src/test/resources/motivation-letter.txt";
 	    driver.findElement(By.id("candidate_file_remote_url")).sendKeys(motivationLetterLocation);
 
+	    Thread.sleep(1000);
+	    if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[1]/div/a")).isDisplayed()) {
+	    	assertTrue(true, "Additional file is uploaded");
+	    }else {
+	    	assertTrue(false, "Additional file is not uploaded");
+	    }
+	    
 	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")).click();
 	    String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
 	    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")));
 	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")).sendKeys(referencesLocation);
-	    	    
+	    	
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).click();
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).sendKeys("Cover letter....");
 	    
@@ -81,7 +96,7 @@ class Task3 {
 	      }
 	    catch(TimeoutException e) {
 	        System.out.println("Element isn't clickable");
-	     }
+	    }
 	
 	}
 }
