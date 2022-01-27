@@ -81,10 +81,11 @@ class Task3 {
 	    }else {
 	    	assertTrue(false, "Additional file is not uploaded");
 	    }
-	    
+
+	    wait.until(ExpectedConditions
+	    		.presenceOfElementLocated(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")));
 	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")).click();
 	    String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
-	    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")));
 	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")).sendKeys(referencesLocation);
 	    	
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).click();

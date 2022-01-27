@@ -33,7 +33,7 @@ class Task2 {
 		String actual = allFilteredCountries.toString();
 		
 		//Check if two lists are the not the same
-		assertNotSame(expected, actual, "Lists should not be equal");
+		assertNotEquals(expected, actual, "Lists should not be equal");
 	}
 
 }

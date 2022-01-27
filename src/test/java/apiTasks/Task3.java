@@ -2,7 +2,6 @@ package apiTasks;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testng.Assert.assertSame;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ class Task3 {
 		String actual = allFilteredCountries.toString();
 				
 		//Check if two lists are the same
-		assertSame(expected, actual, "Lists should be equal");
+		assertEquals(expected, actual, "Lists should be equal");
 	}
 
 }
