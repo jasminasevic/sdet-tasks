@@ -34,10 +34,10 @@ class Task3 {
 	    
 	    WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(By.cssSelector(".transition-opacity:nth-child(34) .text-block-base-link")));
+	    		.visibilityOfElementLocated(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[36]/a")));
 	    
-	    driver.findElement(By.cssSelector(".transition-opacity:nth-child(34) .text-block-base-link")).click();
-	    driver.findElement(By.cssSelector(".mt-10 .truncate")).click();
+	    driver.findElement(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[36]/a")).click();
+	    driver.findElement(By.xpath("/html/body/main/section[1]/div/div/div[2]/a")).click();
 	    
 	    wait.until(ExpectedConditions
 	    		.visibilityOfElementLocated(By.id("candidate_first_name")));
