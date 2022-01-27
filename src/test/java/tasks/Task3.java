@@ -54,14 +54,42 @@ class Task3 {
 	    driver.findElement(By.id("candidate_first_name")).click();
 	    driver.findElement(By.id("candidate_first_name")).sendKeys("Jasmina");
 	    
+	    String firstNameValue = driver.findElement(By.id("candidate_first_name")).getAttribute("value");
+	    boolean firstNameValueAdded = false;
+	    if(!firstNameValue.isEmpty()) {
+	    	firstNameValueAdded = true;
+	    }
+	    assertTrue(firstNameValueAdded, "First name should be added");
+	    
 	    driver.findElement(By.id("candidate_last_name")).click();
 	    driver.findElement(By.id("candidate_last_name")).sendKeys("Sevic");
+	    
+	    String lastNameValue = driver.findElement(By.id("candidate_last_name")).getAttribute("value");
+	    boolean lastNameValueAdded = false;
+	    if(!lastNameValue.isEmpty()) {
+	    	lastNameValueAdded = true;
+	    }
+	    assertTrue(lastNameValueAdded, "Last name should be added");
 	    
 	    driver.findElement(By.id("candidate_email")).click();
 	    driver.findElement(By.id("candidate_email")).sendKeys("jasmina@mail.com");
 	    
+	    String emailValue = driver.findElement(By.id("candidate_email")).getAttribute("value");
+	    boolean emailValueAdded = false;
+	    if(!emailValue.isEmpty()) {
+	    	emailValueAdded = true;
+	    }
+	    assertTrue(emailValueAdded, "Email should be added");
+	    
 	    driver.findElement(By.id("candidate_phone")).click();
 	    driver.findElement(By.id("candidate_phone")).sendKeys("+381631234567");
+	    
+	    String phoneValue = driver.findElement(By.id("candidate_phone")).getAttribute("value");
+	    boolean phoneValueAdded = false;
+	    if(!phoneValue.isEmpty()) {
+	    	phoneValueAdded = true;
+	    }
+	    assertTrue(phoneValueAdded, "Phone should be added");
 	    
 	    driver.findElement(By.id("candidate_resume_remote_url")).click();
 	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
@@ -86,13 +114,27 @@ class Task3 {
 	    }
 
 	    wait.until(ExpectedConditions
-	    		.presenceOfElementLocated(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")));
-	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")).click();
+	    		.presenceOfElementLocated(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span")));
+	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span")).click();
 	    String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
-	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button")).sendKeys(referencesLocation);
-	    	
+	    driver.findElement(By.xpath("//*[@id=\"candidate_file_remote_url\"]")).sendKeys(referencesLocation);
+	    
+	    Thread.sleep(1000);
+	    if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[2]/div/a")).isDisplayed()) {
+	    	assertTrue(true, "Second additional file is uploaded");
+	    }else {
+	    	assertTrue(false, "Second additional file is not uploaded");
+	    }
+	    
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).click();
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).sendKeys("Cover letter....");
+	    
+	    String coverLetterValue = driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).getAttribute("value");
+	    boolean coverLetterValueAdded = false;
+	    if(!coverLetterValue.isEmpty()) {
+	    	coverLetterValueAdded = true;
+	    }
+	    assertTrue(coverLetterValueAdded, "Cover letter should be added");
 	    
 	    try {
 		    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"job-application-form\"]/div[7]/div/div/input[1]")));
