@@ -1,15 +1,9 @@
 package apiTasks;
 
-import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 
 @DisplayName("Positive test scenario")
 class Task3 {
@@ -19,26 +13,12 @@ class Task3 {
 	void test() {
 		final String KEYWORD = "Ser";
 		
-		//Get all countries
-		String expected = CountryList.getCountries(KEYWORD);
+		String expected = CountryList
+				.getCountries(KEYWORD);
 		
-		//Get filtered countries with keyword
-		String url = "https://restcountries.com/v3.1/name/" + KEYWORD;
-		
-		Response filteredCountries = given()
-				.get(url);
-		
-		int expectedStatusCode = 200;
-		int actualStatusCode = filteredCountries.getStatusCode();
-		
-		assertEquals(expectedStatusCode, actualStatusCode, "Status code should be 200");
-					
-		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
-		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
-					
-		String actual = allFilteredCountries.toString();
+		String actual = FilteredCountryList
+				.getFilteredCountries(KEYWORD);
 				
-		//Check if two lists are the same
 		assertEquals(expected, actual, "Lists should be equal");
 	}
 

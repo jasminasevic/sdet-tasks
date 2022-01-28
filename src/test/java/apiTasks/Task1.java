@@ -14,11 +14,12 @@ class Task1 {
 	void test() {
 		final String KEYWORD = "Austr";
 		
-		//Get filtered countries with keyword
 		String url = "https://restcountries.com/v3.1/name/" + KEYWORD;
 			
 		int expectedStatusCode = 404;
-		int actualStatusCode = given().get(url).getStatusCode();
+		int actualStatusCode = given()
+				.get(url)
+				.getStatusCode();
 		
 		assertEquals(expectedStatusCode, actualStatusCode, "Status code should be 404");
 	}

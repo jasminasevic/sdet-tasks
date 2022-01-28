@@ -15,10 +15,12 @@ public class CountryList {
 		//Get all countries
 		String url = "https://restcountries.com/v3.1/all";
 		
-		Response response = given().get(url);
+		Response response = given()
+				.get(url);
 		
 		int expectedStatusCode = 200;
-		int actualStatusCode = response.getStatusCode();
+		int actualStatusCode = response
+				.getStatusCode();
 		
 		assertEquals(expectedStatusCode, actualStatusCode, "Status code should be 200");
 		
