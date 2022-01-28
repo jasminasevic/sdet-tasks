@@ -15,12 +15,13 @@ public class CountryList {
 		//Get all countries
 		String url = "https://restcountries.com/v3.1/all";
 		
+		Response response = given().get(url);
+		
 		int expectedStatusCode = 200;
-		int actualStatusCode = given().get(url).getStatusCode();
+		int actualStatusCode = response.getStatusCode();
 		
 		assertEquals(expectedStatusCode, actualStatusCode, "Status code should be 200");
 		
-		Response response = given().get(url);
 		JsonPath allCountriesJsonPath = response.jsonPath();
 				
 		List<String> allCountries = allCountriesJsonPath.get("name.official");
