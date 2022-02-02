@@ -5,6 +5,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.time.Duration;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,14 +33,15 @@ class Task3 {
 
 		driver.get(baseUrl);
 		
-		driver.findElement(By.cssSelector(".sm\\3Aml-10 .truncate")).click();
+		driver.findElement(By.linkText("Job openings")).click();
+
 	    driver.findElement(By.cssSelector(".flex > .careersite-button .truncate")).click();
 	    
 	    WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[36]/a")));
+	    		.visibilityOfElementLocated(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[40]/a")));
 	    
-	    driver.findElement(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[36]/a")).click();
+	    driver.findElement(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[40]/a")).click();
 	    driver.findElement(By.xpath("/html/body/main/section[1]/div/div/div[2]/a")).click();
 	    
 	    wait.until(ExpectedConditions
@@ -84,57 +86,71 @@ class Task3 {
 	    driver.findElement(By.id("candidate_phone")).click();
 	    driver.findElement(By.id("candidate_phone")).sendKeys("+381631234567");
 	    
+	    SoftAssertions softly = new SoftAssertions();
+	    
 	    String phoneValue = driver.findElement(By.id("candidate_phone")).getAttribute("value");
 	    boolean phoneValueAdded = false;
 	    if(!phoneValue.isEmpty()) {
 	    	phoneValueAdded = true;
 	    }
-	    assertTrue(phoneValueAdded, "Phone should be added");
+	    softly.assertThat(phoneValueAdded).as("phone value").isTrue();
 	    
 	    driver.findElement(By.id("candidate_resume_remote_url")).click();
 	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
 	    driver.findElement(By.id("candidate_resume_remote_url")).sendKeys(cvLocation);
 	    
 	    Thread.sleep(1000);
-	    if(driver.findElement(By.xpath("//*[@id=\"upload_resume_field\"]/div[2]/div/div/a")).isDisplayed()) {
-	    	assertTrue(true, "CV is uploaded");
-	    }else {
-	    	assertTrue(false, "CV is not uploaded");
+	    boolean isCvFileAdded = false;
+	    try {
+	    	if(driver.findElement(By.xpath("//*[@id=\"upload_resume_field\"]/div[2]/div/div/a")).isDisplayed()) {
+	    		isCvFileAdded = true;
+	    	}
+	    } catch(Exception e){
+	    	isCvFileAdded = false;
 	    }
+	    softly.assertThat(isCvFileAdded).as("CV file").isTrue();
 	    
 	    driver.findElement(By.id("candidate_file_remote_url")).click();
 	    String motivationLetterLocation = System.getProperty("user.dir") + "/src/test/resources/motivation-letter.txt";
 	    driver.findElement(By.id("candidate_file_remote_url")).sendKeys(motivationLetterLocation);
 
 	    Thread.sleep(1000);
-	    if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[1]/div/a")).isDisplayed()) {
-	    	assertTrue(true, "Additional file is uploaded");
-	    }else {
-	    	assertTrue(false, "Additional file is not uploaded");
-	    }
-
-	    wait.until(ExpectedConditions
-	    		.presenceOfElementLocated(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span")));
-	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span")).click();
-	    String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
-	    driver.findElement(By.xpath("//*[@id=\"candidate_file_remote_url\"]")).sendKeys(referencesLocation);
-	    
-	    Thread.sleep(1000);
-	    if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[2]/div/a")).isDisplayed()) {
-	    	assertTrue(true, "Second additional file is uploaded");
-	    }else {
-	    	assertTrue(false, "Second additional file is not uploaded");
+	    boolean isMotivationLetterFileAdded = false;
+	    try {
+	    	if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[1]/div/a")).isDisplayed()) {
+	    		isMotivationLetterFileAdded = true;
+	    	}
+	    } catch(Exception e) {
+	    	isMotivationLetterFileAdded = false;
+	    	}
+	    softly.assertThat(isMotivationLetterFileAdded).as("Motivation letter file").isTrue();
+		
+	    if(isMotivationLetterFileAdded) {
+		    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span")).click();
+		    String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
+		    driver.findElement(By.xpath("//*[@id=\"candidate_file_remote_url\"]")).sendKeys(referencesLocation);
+		    
+		    Thread.sleep(1000);
+		    boolean isSecondMotivationLetterFileAdded = false;
+		    try {
+			    if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[2]/div/a")).isDisplayed()) {
+			    	isSecondMotivationLetterFileAdded = true;
+			    }
+			} catch(Exception e) {
+				isSecondMotivationLetterFileAdded = false;
+			}
+		softly.assertThat(isSecondMotivationLetterFileAdded).as("Second motivation letter file").isTrue();
 	    }
 	    
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).click();
 	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).sendKeys("Cover letter....");
 	    
 	    String coverLetterValue = driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).getAttribute("value");
-	    boolean coverLetterValueAdded = false;
+	    boolean isCoverLetterValueAdded = false;
 	    if(!coverLetterValue.isEmpty()) {
-	    	coverLetterValueAdded = true;
+	    	isCoverLetterValueAdded = true;
 	    }
-	    assertTrue(coverLetterValueAdded, "Cover letter should be added");
+	    softly.assertThat(isCoverLetterValueAdded).as("Cover letter").isTrue();
 	    
 	    try {
 		    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"job-application-form\"]/div[7]/div/div/input[1]")));
@@ -143,6 +159,8 @@ class Task3 {
 	    catch(TimeoutException e) {
 	        System.out.println("Element isn't clickable");
 	    }
+	    
+	    softly.assertAll();
 	
 	}
 }
