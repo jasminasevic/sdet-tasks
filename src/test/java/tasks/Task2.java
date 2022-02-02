@@ -31,7 +31,7 @@ class Task2 {
 		driver.get(baseUrl);
 		
 	    driver.manage().window().setSize(new Dimension(1311, 741));
-	    driver.findElement(By.cssSelector(".sm\\3Aml-10 .truncate")).click();
+		driver.findElement(By.linkText("Job openings")).click();
 	    driver.findElement(By.cssSelector(".flex > .careersite-button .truncate")).click();
 
 	    Thread.sleep(3000);
