@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 import java.time.Duration;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,11 @@ class Task3 {
 	@BeforeAll
 	static public void setUp() {
 		driver = new ChromeDriver();
+	}
+	
+	@AfterAll
+	static public void tearDown() {
+	    driver.quit();
 	}
 	
 	@Test

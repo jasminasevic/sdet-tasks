@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,11 @@ class Task1 {
 	@BeforeAll
 	static public void setUp() {
 	   driver = new ChromeDriver();
+	}
+	
+	@AfterAll
+	static public void tearDown() {
+	    driver.quit();
 	}
 
 	@Test

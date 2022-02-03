@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,11 @@ class Task2 {
 	@BeforeAll
 	static public void setUp() {
 	   driver = new ChromeDriver();
+	}
+	
+	@AfterAll
+	static public void tearDown() {
+	    driver.quit();
 	}
 	
 	@Test
