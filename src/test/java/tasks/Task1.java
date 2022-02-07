@@ -60,7 +60,7 @@ class Task1 {
 	    	flag = true;
 	    };
 	    
-  	    assertTrue(flag, "The list should contain Junior SDET Engineer - Redbox team QA/QE · Belgrad position");
+  	    assertTrue(flag, "The list should contain Junior SDET Engineer - Redbox team QA/QE · Belgrade position");
 		
 	}
 }

@@ -26,8 +26,7 @@ public class FilteredCountryList {
 		JsonPath filteredCountriesJsonPath = filteredCountries.jsonPath();
 		List<String> allFilteredCountries = filteredCountriesJsonPath.get("name.official");		
 							
-		String actual = allFilteredCountries.toString();
-		return actual;
+		return allFilteredCountries.toString();
 	}
 	
 }

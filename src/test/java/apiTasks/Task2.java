@@ -7,19 +7,15 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Bad response")
 class Task2 {
-
+	static final String KEYWORD = "United";
+	
 	@Test
 	@DisplayName("Comparing two lists content")
 	void test() {
-		final String KEYWORD = "United";
-		
-		String expected = CountryList
-				.getCountries(KEYWORD);
-		
-		String actual = FilteredCountryList
-				.getFilteredCountries(KEYWORD);
-		
-		assertNotEquals(expected, actual, "Lists should not be equal");
+		assertNotEquals(CountryList
+					.getCountries(KEYWORD), 
+				FilteredCountryList
+					.getFilteredCountries(KEYWORD), "Lists should not be equal");
 	}
 
 }

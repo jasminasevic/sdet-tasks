@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Bad status code")
 class Task1 {
-
+	static final String KEYWORD = "Austr";
+	
 	@Test
 	@DisplayName("Comparing two lists content")
 	void test() {
-		final String KEYWORD = "Austr";
 		
 		String url = "https://restcountries.com/v3.1/name/" + KEYWORD;
 			

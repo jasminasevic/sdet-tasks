@@ -7,19 +7,15 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Positive test scenario")
 class Task3 {
-
+	static final String KEYWORD = "Ser";
+	
 	@Test
 	@DisplayName("Comparing two lists content")
 	void test() {
-		final String KEYWORD = "Ser";
-		
-		String expected = CountryList
-				.getCountries(KEYWORD);
-		
-		String actual = FilteredCountryList
-				.getFilteredCountries(KEYWORD);
-				
-		assertEquals(expected, actual, "Lists should be equal");
+		assertEquals(CountryList
+					.getCountries(KEYWORD), 
+				FilteredCountryList
+					.getFilteredCountries(KEYWORD), "Lists should be equal");
 	}
 
 }

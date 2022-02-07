@@ -37,8 +37,7 @@ public class CountryList {
 			}
 		}
 				
-		String expected = allCountriesWithKeyword.toString();
+		return allCountriesWithKeyword.toString();
 				
-		return expected;
 	}
 }
