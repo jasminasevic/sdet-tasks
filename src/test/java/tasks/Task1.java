@@ -17,12 +17,7 @@ class Task1 extends BaseUITest {
 	@Test
 	@DisplayName("Verify that Junior SDET Engineer - Redbox Team is in the list")
 	void test() throws InterruptedException {
-		
-		String baseUrl = getBaseURL();
-		driver.get(baseUrl);
-		driver.findElement(By.linkText("Job openings")).click();
-	    driver.findElement(By.cssSelector(".flex > .careersite-button > .flex")).click();
-			    
+			
 	    Thread.sleep(3000);
 	    List<WebElement> jobs = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));  	    
 	    

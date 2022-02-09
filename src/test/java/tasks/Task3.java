@@ -6,14 +6,10 @@ import static org.testng.Assert.assertTrue;
 import java.time.Duration;
 
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,11 +20,6 @@ class Task3 extends BaseUITest {
 	@DisplayName("Form validation")
 	void test() throws InterruptedException {
 		
-		driver.get(getBaseURL());
-		
-		driver.findElement(By.linkText("Job openings")).click();
-	    driver.findElement(By.cssSelector(".flex > .careersite-button .truncate")).click();
-	    
 	    WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	    wait.until(ExpectedConditions
 	    		.visibilityOfElementLocated(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[42]/a")));
@@ -87,20 +78,20 @@ class Task3 extends BaseUITest {
 	    }
 	    softly.assertThat(phoneValueAdded).as("phone value").isTrue();
 	    
-//	    driver.findElement(By.id("candidate_resume_remote_url")).click();
-//	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
-//	    driver.findElement(By.id("candidate_resume_remote_url")).sendKeys(cvLocation);
-//	    
-//	    Thread.sleep(1000);
-//	    boolean isCvFileAdded = false;
-//	    try {
-//	    	if(driver.findElement(By.xpath("//*[@id=\"upload_resume_field\"]/div[2]/div/div/a")).isDisplayed()) {
-//	    		isCvFileAdded = true;
-//	    	}
-//	    } catch(Exception e){
-//	    	isCvFileAdded = false;
-//	    }
-//	    softly.assertThat(isCvFileAdded).as("CV file").isTrue();
+	    driver.findElement(By.id("candidate_resume_remote_url")).click();
+	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
+	    driver.findElement(By.id("candidate_resume_remote_url")).sendKeys(cvLocation);
+	    
+	    Thread.sleep(1000);
+	    boolean isCvFileAdded = false;
+	    try {
+	    	if(driver.findElement(By.xpath("//*[@id=\"upload_resume_field\"]/div[2]/div/div/a")).isDisplayed()) {
+	    		isCvFileAdded = true;
+	    	}
+	    } catch(Exception e){
+	    	isCvFileAdded = false;
+	    }
+	    softly.assertThat(isCvFileAdded).as("CV file").isTrue();
 	    
 	    driver.findElement(By.id("candidate_file_remote_url")).click();
 	    String motivationLetterLocation = System.getProperty("user.dir") + "/src/test/resources/motivation-letter.txt";

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,6 +34,9 @@ public class BaseUITest {
     	driver = new ChromeDriver();
     	wait = new WebDriverWait(driver, Duration.ofSeconds(MAX_WAIT_DURATION), Duration.ofMillis(POLLING_WAIT_DURATION));
     	driver.manage().window().maximize();
+		driver.get(getBaseURL());
+		driver.findElement(By.linkText("Job openings")).click();
+	    driver.findElement(By.linkText("All jobs")).click();
     }
 
     @AfterEach

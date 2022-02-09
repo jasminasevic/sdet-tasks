@@ -16,11 +16,6 @@ class Task2 extends BaseUITest {
 	@Test
 	@DisplayName("Get the list of open QA/QE positions in Belgrade")
 	void test() throws InterruptedException {
-		
-		driver.get(getBaseURL());
-		
-		driver.findElement(By.linkText("Job openings")).click();
-	    driver.findElement(By.cssSelector(".flex > .careersite-button .truncate")).click();
 
 	    Thread.sleep(3000);
 	    driver.findElement(By.xpath("//*[@title='Departments']")).click();
