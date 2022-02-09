@@ -67,6 +67,13 @@
 			<version>6.10</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<!-- This is used to automatically download correct versions of drivers for browsers -->
+		<dependency>
+		   <groupId>io.github.bonigarcia</groupId>
+		   <artifactId>webdrivermanager</artifactId>
+		   <version>5.0.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -5,38 +5,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 @DisplayName("Get the list of positions")
-class Task2 {
-
-	static private WebDriver driver;
-	  
-	@BeforeAll
-	static public void setUp() {
-	   driver = new ChromeDriver();
-	}
-	
-	@AfterAll
-	static public void tearDown() {
-	    driver.quit();
-	}
+class Task2 extends BaseUITest {
 	
 	@Test
 	@DisplayName("Get the list of open QA/QE positions in Belgrade")
 	void test() throws InterruptedException {
-		String baseUrl = "https://careers.interventure.info/";
-		driver.get(baseUrl);
 		
-	    driver.manage().window().setSize(new Dimension(1311, 741));
+		driver.get(getBaseURL());
+		
 		driver.findElement(By.linkText("Job openings")).click();
 	    driver.findElement(By.cssSelector(".flex > .careersite-button .truncate")).click();
 
@@ -60,11 +42,7 @@ class Task2 {
   	    	}
 		}
   	    
-  	    boolean flag = true; 
-  	    if(allJobDetails.isEmpty()) {
-  	    	flag = false;
-  	    }
-  	    assertTrue(flag, "The list should contain all QA/QE positions in Belgrade");
+  	    assertTrue(!allJobDetails.isEmpty(), "The list should contain all QA/QE positions in Belgrade");
   	    
  	    
   	    List<String> jobTitles = new ArrayList<>();
