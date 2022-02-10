@@ -3,15 +3,12 @@ package tasks;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import java.time.Duration;
-
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 @DisplayName("Verify that form works properly")
 class Task3 extends BaseUITest {
@@ -20,13 +17,12 @@ class Task3 extends BaseUITest {
 	@DisplayName("Form validation")
 	void test() throws InterruptedException {
 		
-	    WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[42]/a")));
+	    		.visibilityOfElementLocated(By.xpath("//*[@id='section-jobs']/div[2]/ul/li[42]/a")));
 	    
-	    driver.findElement(By.xpath("//*[@id=\"section-jobs\"]/div[2]/ul/li[42]/a")).click();
+	    driver.findElement(By.xpath("//*[@id='section-jobs']/div[2]/ul/li[42]/a")).click();
 	    driver.findElement(By.xpath("/html/body/main/section[1]/div/div/div[2]/a")).click();
-	    
+	    	    
 	    wait.until(ExpectedConditions
 	    		.visibilityOfElementLocated(By.id("candidate_first_name")));
 	    
@@ -40,31 +36,19 @@ class Task3 extends BaseUITest {
 	    driver.findElement(By.id("candidate_first_name")).sendKeys("Jasmina");
 	    
 	    String firstNameValue = driver.findElement(By.id("candidate_first_name")).getAttribute("value");
-	    boolean firstNameValueAdded = false;
-	    if(!firstNameValue.isEmpty()) {
-	    	firstNameValueAdded = true;
-	    }
-	    assertTrue(firstNameValueAdded, "First name should be added");
+	    assertTrue(!firstNameValue.isEmpty(), "First name should be added");
 	    
 	    driver.findElement(By.id("candidate_last_name")).click();
 	    driver.findElement(By.id("candidate_last_name")).sendKeys("Sevic");
 	    
 	    String lastNameValue = driver.findElement(By.id("candidate_last_name")).getAttribute("value");
-	    boolean lastNameValueAdded = false;
-	    if(!lastNameValue.isEmpty()) {
-	    	lastNameValueAdded = true;
-	    }
-	    assertTrue(lastNameValueAdded, "Last name should be added");
+	    assertTrue(!lastNameValue.isEmpty(), "Last name should be added");
 	    
 	    driver.findElement(By.id("candidate_email")).click();
 	    driver.findElement(By.id("candidate_email")).sendKeys("jasmina@mail.com");
 	    
 	    String emailValue = driver.findElement(By.id("candidate_email")).getAttribute("value");
-	    boolean emailValueAdded = false;
-	    if(!emailValue.isEmpty()) {
-	    	emailValueAdded = true;
-	    }
-	    assertTrue(emailValueAdded, "Email should be added");
+	    assertTrue(!emailValue.isEmpty(), "Email should be added");
 	    
 	    driver.findElement(By.id("candidate_phone")).click();
 	    driver.findElement(By.id("candidate_phone")).sendKeys("+381631234567");
@@ -72,11 +56,7 @@ class Task3 extends BaseUITest {
 	    SoftAssertions softly = new SoftAssertions();
 	    
 	    String phoneValue = driver.findElement(By.id("candidate_phone")).getAttribute("value");
-	    boolean phoneValueAdded = false;
-	    if(!phoneValue.isEmpty()) {
-	    	phoneValueAdded = true;
-	    }
-	    softly.assertThat(phoneValueAdded).as("phone value").isTrue();
+	    softly.assertThat(!phoneValue.isEmpty()).as("phone value").isTrue();
 	    
 	    driver.findElement(By.id("candidate_resume_remote_url")).click();
 	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
