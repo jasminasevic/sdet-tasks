@@ -1,6 +1,6 @@
 package tasks;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ class Task1 extends BaseUITest {
 	            		"QA/QE · Belgrade"))
 	            .collect(Collectors.joining());
   	    
-  	    assertTrue(!filteredList.isEmpty(), "The list should contain Junior SDET Engineer - Redbox team QA/QE · Belgrade position");
+  	    assertFalse(filteredList.isEmpty(), "The list should contain Junior SDET Engineer - Redbox team QA/QE · Belgrade position");
 		
 	}
 }

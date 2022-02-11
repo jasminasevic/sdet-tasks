@@ -1,7 +1,7 @@
 package tasks;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -34,19 +34,19 @@ class Task3 extends BaseUITest {
 	    driver.findElement(By.id("candidate_first_name")).sendKeys("Jasmina");
 	    
 	    String firstNameValue = driver.findElement(By.id("candidate_first_name")).getAttribute("value");
-	    assertTrue(!firstNameValue.isEmpty(), "First name should be added");
+	    assertFalse(firstNameValue.isEmpty(), "First name should be added");
 	    
 	    driver.findElement(By.id("candidate_last_name")).click();
 	    driver.findElement(By.id("candidate_last_name")).sendKeys("Sevic");
 	    
 	    String lastNameValue = driver.findElement(By.id("candidate_last_name")).getAttribute("value");
-	    assertTrue(!lastNameValue.isEmpty(), "Last name should be added");
+	    assertFalse(lastNameValue.isEmpty(), "Last name should be added");
 	    
 	    driver.findElement(By.id("candidate_email")).click();
 	    driver.findElement(By.id("candidate_email")).sendKeys("jasmina@mail.com");
 	    
 	    String emailValue = driver.findElement(By.id("candidate_email")).getAttribute("value");
-	    assertTrue(!emailValue.isEmpty(), "Email should be added");
+	    assertFalse(emailValue.isEmpty(), "Email should be added");
 	    
 	    driver.findElement(By.id("candidate_phone")).click();
 	    driver.findElement(By.id("candidate_phone")).sendKeys("+381631234567");
@@ -54,7 +54,7 @@ class Task3 extends BaseUITest {
 	    SoftAssertions softly = new SoftAssertions();
 	    
 	    String phoneValue = driver.findElement(By.id("candidate_phone")).getAttribute("value");
-	    softly.assertThat(!phoneValue.isEmpty()).as("phone value").isTrue();
+	    softly.assertThat(phoneValue.isEmpty()).as("phone value").isFalse();
 	    	       
 	    driver.findElement(By.id("upload_resume_field")).click();
 		

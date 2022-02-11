@@ -37,7 +37,7 @@ class Task2 extends BaseUITest {
   	    	}
 		}
   	    
-  	    assertTrue(!allJobDetails.isEmpty(), "The list should contain all QA/QE positions in Belgrade");
+  	    assertFalse(allJobDetails.isEmpty(), "The list should contain all QA/QE positions in Belgrade");
   	    
  	    
   	    List<String> jobTitles = new ArrayList<>();
