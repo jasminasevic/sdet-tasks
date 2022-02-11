@@ -18,18 +18,16 @@ class Task3 extends BaseUITest {
 	void test() throws InterruptedException {
 		
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(By.xpath("//*[@id='section-jobs']/div[2]/ul/li[42]/a")));
-	    
-	    driver.findElement(By.xpath("//*[@id='section-jobs']/div[2]/ul/li[42]/a")).click();
-	    driver.findElement(By.xpath("/html/body/main/section[1]/div/div/div[2]/a")).click();
+	    		.visibilityOfElementLocated(By.xpath("//*[@title='Senior SDET Engineer - Redbox team']")));
+	     
+	    driver.findElement(By.xpath("//*[@title='Senior SDET Engineer - Redbox team']")).click();
 	    	    
+	    driver.findElement(By.linkText("Apply for this Job")).click();
 	    wait.until(ExpectedConditions
 	    		.visibilityOfElementLocated(By.id("candidate_first_name")));
 	    
 	    String expectedTitle = "Senior SDET Engineer - Redbox team";
-	    
-	    String actualTitle = driver.findElement(By.xpath("/html/body/section/div[1]/div/h1/span")).getText();
-	    
+	    String actualTitle = driver.findElement(By.xpath("//*[@class='textFitted']")).getText();
 	    assertEquals(actualTitle, expectedTitle, "Position title should be Senior SDET Engineer - Redbox team");
 	    
 	    driver.findElement(By.id("candidate_first_name")).click();
@@ -57,15 +55,16 @@ class Task3 extends BaseUITest {
 	    
 	    String phoneValue = driver.findElement(By.id("candidate_phone")).getAttribute("value");
 	    softly.assertThat(!phoneValue.isEmpty()).as("phone value").isTrue();
-	    
-	    driver.findElement(By.id("candidate_resume_remote_url")).click();
+	    	       
+	    driver.findElement(By.id("upload_resume_field")).click();
+		
 	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
 	    driver.findElement(By.id("candidate_resume_remote_url")).sendKeys(cvLocation);
 	    
 	    Thread.sleep(1000);
 	    boolean isCvFileAdded = false;
 	    try {
-	    	if(driver.findElement(By.xpath("//*[@id=\"upload_resume_field\"]/div[2]/div/div/a")).isDisplayed()) {
+	    	if(driver.findElement(By.xpath("//*[@id='upload_resume_field']/div[2]/div/div/a")).isDisplayed()) {
 	    		isCvFileAdded = true;
 	    	}
 	    } catch(Exception e){
@@ -73,7 +72,7 @@ class Task3 extends BaseUITest {
 	    }
 	    softly.assertThat(isCvFileAdded).as("CV file").isTrue();
 	    
-	    driver.findElement(By.id("candidate_file_remote_url")).click();
+	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[1]")).click();    
 	    String motivationLetterLocation = System.getProperty("user.dir") + "/src/test/resources/motivation-letter.txt";
 	    driver.findElement(By.id("candidate_file_remote_url")).sendKeys(motivationLetterLocation);
 
