@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import pages.HomeCareers;
+
 public class BaseUITest {
 	private static final int MAX_WAIT_DURATION = 10;
 	private static final int POLLING_WAIT_DURATION = 150;
@@ -35,8 +37,10 @@ public class BaseUITest {
     	wait = new WebDriverWait(driver, Duration.ofSeconds(MAX_WAIT_DURATION), Duration.ofMillis(POLLING_WAIT_DURATION));
     	driver.manage().window().maximize();
 		driver.get(getBaseURL());
-		driver.findElement(By.linkText("Job openings")).click();
-	    driver.findElement(By.linkText("All jobs")).click();
+		
+		HomeCareers homeCareers = new HomeCareers(driver);
+		homeCareers.clickButtonJobOpenings();
+		homeCareers.clickButtonAllJobs();
     }
 
     @AfterEach
