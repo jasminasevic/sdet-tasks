@@ -3,11 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomeCareers {
+public class CareersHomePage {
 	
 	WebDriver driver = null;
 	
-	public HomeCareers(WebDriver driver) {
+	public CareersHomePage(WebDriver driver) {
 		this.driver = driver;
 	}
 	

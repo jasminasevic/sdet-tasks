@@ -10,6 +10,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import pages.AllJobsListingPage;
+import pages.SeniorSdetEngineerRedboxApplicationPage;
+import pages.SeniorSdetEngineerRedboxDescriptionPage;
+
 @DisplayName("Verify that form works properly")
 class Task3 extends BaseUITest {
 	
@@ -17,14 +21,18 @@ class Task3 extends BaseUITest {
 	@DisplayName("Form validation")
 	void test() throws InterruptedException {
 		
+		AllJobsListingPage allJobsListingPage = new AllJobsListingPage(driver);
+		SeniorSdetEngineerRedboxDescriptionPage seniorSdetEngineerRedboxDescriptionPage = new SeniorSdetEngineerRedboxDescriptionPage(driver);
+		SeniorSdetEngineerRedboxApplicationPage seniorSdetEngineerRedboxApplicationPage = new SeniorSdetEngineerRedboxApplicationPage(driver);
+		
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(By.xpath("//*[@title='Senior SDET Engineer - Redbox team']")));
-	     
-	    driver.findElement(By.xpath("//*[@title='Senior SDET Engineer - Redbox team']")).click();
+	    		.visibilityOfElementLocated(allJobsListingPage.getSeniorSdetEngeenerTeamTitle()));
+	    allJobsListingPage.clickSeniorSDETEngineerRedboxTeamTitle();
 	    	    
-	    driver.findElement(By.linkText("Apply for this Job")).click();
+	    seniorSdetEngineerRedboxDescriptionPage.clickButtonApplyForThisJob();
+	    
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(By.id("candidate_first_name")));
+	    		.visibilityOfElementLocated(seniorSdetEngineerRedboxApplicationPage.getCandidateFirstName()));
 	    
 	    String expectedTitle = "Senior SDET Engineer - Redbox team";
 	    String actualTitle = driver.findElement(By.xpath("//*[@class='textFitted']")).getText();

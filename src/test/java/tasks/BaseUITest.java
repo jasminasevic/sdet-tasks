@@ -6,14 +6,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import pages.HomeCareers;
+import pages.CareersHomePage;
 
 public class BaseUITest {
 	private static final int MAX_WAIT_DURATION = 10;
@@ -38,9 +37,9 @@ public class BaseUITest {
     	driver.manage().window().maximize();
 		driver.get(getBaseURL());
 		
-		HomeCareers homeCareers = new HomeCareers(driver);
-		homeCareers.clickButtonJobOpenings();
-		homeCareers.clickButtonAllJobs();
+		CareersHomePage careersHomePage = new CareersHomePage(driver);
+		careersHomePage.clickButtonJobOpenings();
+		careersHomePage.clickButtonAllJobs();
     }
 
     @AfterEach

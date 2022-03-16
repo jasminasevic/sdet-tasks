@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+
 @DisplayName("Verify that position is in the list")
 class Task1 extends BaseUITest {
 
