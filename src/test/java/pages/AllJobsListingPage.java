@@ -13,14 +13,14 @@ public class AllJobsListingPage {
 	
 	//@FindBy(xpath = "//ul[@class='block-grid']/li") List<WebElement> allJobs;
 	
-	By seniorSDETEngineerRedboxTeamTitle = By.xpath("//*[@title='Senior SDET Engineer - Redbox team']");
+	By jobTitle = By.xpath("//*[@title='Junior SDET Engineer - Redbox team']");
 	
-	public By getSeniorSdetEngeenerTeamTitle() {
-		return this.seniorSDETEngineerRedboxTeamTitle;
+	public By getJobTitle() {
+		return this.jobTitle;
 	}
 	
-	public void clickSeniorSDETEngineerRedboxTeamTitle() {
-		driver.findElement(seniorSDETEngineerRedboxTeamTitle).click();
+	public void clickJobTitle() {
+		driver.findElement(jobTitle).click();
 	}
 	
 }

@@ -11,8 +11,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import pages.AllJobsListingPage;
-import pages.SeniorSdetEngineerRedboxApplicationPage;
-import pages.SeniorSdetEngineerRedboxDescriptionPage;
+import pages.JobApplicationPage;
+import pages.JobDescriptionPage;
 
 @DisplayName("Verify that form works properly")
 class Task3 extends BaseUITest {
@@ -22,52 +22,49 @@ class Task3 extends BaseUITest {
 	void test() throws InterruptedException {
 		
 		AllJobsListingPage allJobsListingPage = new AllJobsListingPage(driver);
-		SeniorSdetEngineerRedboxDescriptionPage seniorSdetEngineerRedboxDescriptionPage = new SeniorSdetEngineerRedboxDescriptionPage(driver);
-		SeniorSdetEngineerRedboxApplicationPage seniorSdetEngineerRedboxApplicationPage = new SeniorSdetEngineerRedboxApplicationPage(driver);
+		JobDescriptionPage jobDescriptionPage = new JobDescriptionPage(driver);
+		JobApplicationPage jobApplicationPage = new JobApplicationPage(driver);
 		
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(allJobsListingPage.getSeniorSdetEngeenerTeamTitle()));
-	    allJobsListingPage.clickSeniorSDETEngineerRedboxTeamTitle();
+	    		.visibilityOfElementLocated(allJobsListingPage.getJobTitle()));
+	    allJobsListingPage.clickJobTitle();
 	    	    
-	    seniorSdetEngineerRedboxDescriptionPage.clickButtonApplyForThisJob();
+	    jobDescriptionPage.clickButtonApplyForThisJob();
 	    
+	    By candidateFirstName = jobApplicationPage.getFirstName();
 	    wait.until(ExpectedConditions
-	    		.visibilityOfElementLocated(seniorSdetEngineerRedboxApplicationPage.getCandidateFirstName()));
+	    		.visibilityOfElementLocated(candidateFirstName));
 	    
-	    String expectedTitle = "Senior SDET Engineer - Redbox team";
-	    String actualTitle = driver.findElement(By.xpath("//*[@class='textFitted']")).getText();
-	    assertEquals(actualTitle, expectedTitle, "Position title should be Senior SDET Engineer - Redbox team");
+	    String expectedTitle = "Junior SDET Engineer - Redbox team";
+	    String actualTitle = jobApplicationPage.getJobTitle();
+	    assertEquals(actualTitle, expectedTitle, "Position title should be Junior SDET Engineer - Redbox team");
 	    
-	    driver.findElement(By.id("candidate_first_name")).click();
-	    driver.findElement(By.id("candidate_first_name")).sendKeys("Jasmina");
-	    
-	    String firstNameValue = driver.findElement(By.id("candidate_first_name")).getAttribute("value");
+	    jobApplicationPage.clickFirstName();
+	    jobApplicationPage.setFirstName("Jasmina");
+	    String firstNameValue = jobApplicationPage.getFirstNameValue();
 	    assertFalse(firstNameValue.isEmpty(), "First name should be added");
 	    
-	    driver.findElement(By.id("candidate_last_name")).click();
-	    driver.findElement(By.id("candidate_last_name")).sendKeys("Sevic");
-	    
-	    String lastNameValue = driver.findElement(By.id("candidate_last_name")).getAttribute("value");
+	    jobApplicationPage.clickLastName();
+	    jobApplicationPage.setLastName("Sevic");
+	    String lastNameValue = jobApplicationPage.getLastNameValue();
 	    assertFalse(lastNameValue.isEmpty(), "Last name should be added");
 	    
-	    driver.findElement(By.id("candidate_email")).click();
-	    driver.findElement(By.id("candidate_email")).sendKeys("jasmina@mail.com");
-	    
-	    String emailValue = driver.findElement(By.id("candidate_email")).getAttribute("value");
+	    jobApplicationPage.clickEmail();
+	    jobApplicationPage.setEmail("jasmina@gmail.com");
+	    String emailValue = jobApplicationPage.getEmailValue();
 	    assertFalse(emailValue.isEmpty(), "Email should be added");
 	    
-	    driver.findElement(By.id("candidate_phone")).click();
-	    driver.findElement(By.id("candidate_phone")).sendKeys("+381631234567");
+	    jobApplicationPage.clickPhone();
+	    jobApplicationPage.setPhone("+38161234567");
 	    
 	    SoftAssertions softly = new SoftAssertions();
 	    
-	    String phoneValue = driver.findElement(By.id("candidate_phone")).getAttribute("value");
+	    String phoneValue = jobApplicationPage.getPhoneValue();
 	    softly.assertThat(phoneValue.isEmpty()).as("phone value").isFalse();
 	    	       
-	    driver.findElement(By.id("upload_resume_field")).click();
-		
+	    jobApplicationPage.clickCV();
 	    String cvLocation = System.getProperty("user.dir") + "/src/test/resources/cv.txt";
-	    driver.findElement(By.id("candidate_resume_remote_url")).sendKeys(cvLocation);
+	    jobApplicationPage.setCV(cvLocation);
 	    
 	    Thread.sleep(1000);
 	    boolean isCvFileAdded = false;
