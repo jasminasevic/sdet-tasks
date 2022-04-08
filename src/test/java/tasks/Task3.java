@@ -67,60 +67,33 @@ class Task3 extends BaseUITest {
 	    jobApplicationPage.setCV(cvLocation);
 	    
 	    Thread.sleep(1000);
-	    boolean isCvFileAdded = false;
-	    try {
-	    	if(driver.findElement(By.xpath("//*[@id='upload_resume_field']/div[2]/div/div/a")).isDisplayed()) {
-	    		isCvFileAdded = true;
-	    	}
-	    } catch(Exception e){
-	    	isCvFileAdded = false;
-	    }
+	    boolean isCvFileAdded = jobApplicationPage.isUploadedCvDisplayed() ? true : false;
 	    softly.assertThat(isCvFileAdded).as("CV file").isTrue();
 	    
-	    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[1]")).click();    
+	    jobApplicationPage.clickUploadMotivationLetterField();
 	    String motivationLetterLocation = System.getProperty("user.dir") + "/src/test/resources/motivation-letter.txt";
-	    driver.findElement(By.id("candidate_file_remote_url")).sendKeys(motivationLetterLocation);
-
+	    jobApplicationPage.setMotivationLetter(motivationLetterLocation);
+	    
 	    Thread.sleep(1000);
-	    boolean isMotivationLetterFileAdded = false;
-	    try {
-	    	if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[1]/div/a")).isDisplayed()) {
-	    		isMotivationLetterFileAdded = true;
-	    	}
-	    } catch(Exception e) {
-	    	isMotivationLetterFileAdded = false;
-	    	}
+	    boolean isMotivationLetterFileAdded = jobApplicationPage.isUploadedMotivationLetterDisplayed() ? true : false;
 	    softly.assertThat(isMotivationLetterFileAdded).as("Motivation letter file").isTrue();
 		
 	    if(isMotivationLetterFileAdded) {
-		    driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span")).click();
-		    String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
-		    driver.findElement(By.xpath("//*[@id=\"candidate_file_remote_url\"]")).sendKeys(referencesLocation);
+		    jobApplicationPage.clickUploadMoreButton();
+	    	String referencesLocation = System.getProperty("user.dir") + "/src/test/resources/references.txt";
+		    jobApplicationPage.setAdditionalMotivationLetter(referencesLocation);
 		    
-		    Thread.sleep(1000);
-		    boolean isSecondMotivationLetterFileAdded = false;
-		    try {
-			    if(driver.findElement(By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[2]/div/a")).isDisplayed()) {
-			    	isSecondMotivationLetterFileAdded = true;
-			    }
-			} catch(Exception e) {
-				isSecondMotivationLetterFileAdded = false;
-			}
-		softly.assertThat(isSecondMotivationLetterFileAdded).as("Second motivation letter file").isTrue();
+		    Thread.sleep(1000);		    
+		    boolean isSecondMotivationLetterFileAdded = jobApplicationPage.isUploadedAdditionalMotivationLetterDisplayed() ? true : false; 
+		    softly.assertThat(isSecondMotivationLetterFileAdded).as("Second motivation letter file").isTrue();
 	    }
 	    
-	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).click();
-	    driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).sendKeys("Cover letter....");
-	    
-	    String coverLetterValue = driver.findElement(By.id("candidate_job_applications_attributes_0_cover_letter")).getAttribute("value");
-	    boolean isCoverLetterValueAdded = false;
-	    if(!coverLetterValue.isEmpty()) {
-	    	isCoverLetterValueAdded = true;
-	    }
-	    softly.assertThat(isCoverLetterValueAdded).as("Cover letter").isTrue();
+	    jobApplicationPage.clickCoverLetter();
+	    jobApplicationPage.setCoverLetter("Cover letter.....");
+	    softly.assertThat(jobApplicationPage.isCoverLetterNotAdded()).as("Cover letter").isFalse();
 	    
 	    try {
-		    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"job-application-form\"]/div[7]/div/div/input[1]")));
+		    wait.until(ExpectedConditions.elementToBeClickable(jobApplicationPage.getSubmitButton()));
 	        System.out.println("Element is clickable");
 	      }
 	    catch(TimeoutException e) {
