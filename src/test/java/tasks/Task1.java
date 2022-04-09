@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import pages.AllJobsListingPage;
 
 
 @DisplayName("Verify that position is in the list")
@@ -19,8 +20,10 @@ class Task1 extends BaseUITest {
 	@DisplayName("Verify that Junior SDET Engineer - Redbox Team is in the list")
 	void test() throws InterruptedException {
 			
+		AllJobsListingPage allJobsListingPage = new AllJobsListingPage(driver);
+		
 	    Thread.sleep(3000);
-	    List<WebElement> jobs = driver.findElements(By.xpath("//ul[@class='block-grid']/li"));  	    
+	    List<WebElement> jobs = allJobsListingPage.getJobsList(); 	    
 	    
   	    List<String> allJobDetails = new ArrayList<>();
 
