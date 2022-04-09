@@ -38,8 +38,7 @@ public class BaseUITest {
 		driver.get(getBaseURL());
 		
 		CareersHomePage careersHomePage = new CareersHomePage(driver);
-		careersHomePage.clickButtonJobOpenings();
-		careersHomePage.clickButtonAllJobs();
+		careersHomePage.clickButtonJobOpenings().clickButtonAllJobs();
     }
 
     @AfterEach

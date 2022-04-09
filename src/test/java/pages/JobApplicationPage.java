@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class JobApplicationPage {
 
 	WebDriver driver = null;
+
 	
 	public JobApplicationPage(WebDriver driver) {
 		this.driver = driver;
@@ -19,14 +20,14 @@ public class JobApplicationPage {
 	By uploadCvField = By.id("upload_resume_field");
 	By candidateCvRemoteUrl = By.id("candidate_resume_remote_url");
 	By uploadedCvField = By.xpath("//*[@id='upload_resume_field']/div[2]/div/div/a");
-	By uploadMotivationLetterField = By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[1]");
+	By uploadMotivationLetterField = By.xpath("//*[@id='job-application-form']/div[5]/div/div[1]");
 	By candidateMotivationLetterRemoteUrl = By.id("candidate_file_remote_url");
-	By uploadedMotivationLetterField = By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[1]/div/a");
-	By uploadMoreButton = By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/button/span");
+	By uploadedMotivationLetterField = By.xpath("//*[@id='job-application-form']/div[5]/div/div[2]/div[1]/div/a");
+	By uploadMoreButton = By.xpath("//*[@id='job-application-form']/div[5]/div/button/span");
 	By candidateAdditionalMotivationLetterRemoteUrl = By.xpath("//*[@id='candidate_file_remote_url']");
-	By uploadedAdditionalMotivationLetterField = By.xpath("//*[@id=\"job-application-form\"]/div[5]/div/div[2]/div[2]/div/a");
+	By uploadedAdditionalMotivationLetterField = By.xpath("//*[@id='job-application-form']/div[5]/div/div[2]/div[2]/div/a");
 	By candidateCoverLetter = By.id("candidate_job_applications_attributes_0_cover_letter");
-	By submitButton = By.xpath("//*[@id=\"job-application-form\"]/div[7]/div/div/input[1]");
+	By submitButton = By.xpath("//*[@id='job-application-form']/div[7]/div/div/input[1]");
 	
 	public String getJobTitle() {
 		return driver.findElement(jobTitle).getText();

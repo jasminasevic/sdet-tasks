@@ -14,12 +14,15 @@ public class CareersHomePage {
 	By buttonJobOpenings = By.linkText("Job openings");
 	By buttonAllJobs = By.linkText("All jobs");
 	
-	public void clickButtonJobOpenings() {
+	
+	public CareersHomePage clickButtonJobOpenings() {
 		driver.findElement(buttonJobOpenings).click();
+		return this;
 	}
 	
-	public void clickButtonAllJobs() {
+	public CareersHomePage clickButtonAllJobs() {
 		driver.findElement(buttonAllJobs).click();
+		return new CareersHomePage(driver);
 	}
 
 }
