@@ -14,8 +14,6 @@ public class AllJobsListingPage {
 		this.driver = driver;
 	}
 	
-	//@FindBy(xpath = "//ul[@class='block-grid']/li") List<WebElement> allJobs;
-	
 	By jobTitle = By.xpath("//*[@title='Junior SDET Engineer - Redbox team']");
 	By departmentsDdlist = By.xpath("//*[@title='Departments']");
 	By specificDepartmentValue = By.xpath("//*[@title='Departments']/..//*[@data-value='QA/QE']");
